@@ -22,7 +22,8 @@ typedef struct{
 	uint16_t Radiator0_IS;
 	uint16_t Radiator1_IS;
 	uint16_t WaterPump_P;
-	uint16_t Radiator_T;
+	uint16_t Radiator0_T;
+	uint16_t Radiator1_T;
 	uint16_t Remain;
 
 }CoolingADC_t;

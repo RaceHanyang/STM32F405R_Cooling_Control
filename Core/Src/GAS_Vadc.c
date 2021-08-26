@@ -32,7 +32,7 @@ void GAS_Vadc_getValue(void)
 	CoolingADC.Remain=ValueOfADC[1];
 	CoolingADC.External_IS=ValueOfADC[2];
 	CoolingADC.WaterPump_P=ValueOfADC[3];
-	CoolingADC.Radiator_T=ValueOfADC[4];
+	CoolingADC.Radiator0_T=ValueOfADC[4];
 	CoolingADC.WaterPump1_IS=ValueOfADC[5];
 	CoolingADC.Radiator1_IS=ValueOfADC[6];
 	CoolingADC.WaterPump1_IS=ValueOfADC[7];
