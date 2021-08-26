@@ -57,19 +57,22 @@ void GAS_CCTL_Control(void){
 	if(TC_msg.B.OnAll)GAS_CCTL_onAll();
 
 	uint8_t defaultDuty = 98;
+
+	float TDRatio = 2.5;
 //	TIM1 -> CCR1 = defaultDuty + TC_msg.B.ExternalFan_DutyOrder;// + CoolingADC.External_IS * Pe;
 //	TIM8 -> CCR1 = defaultDuty + TC_msg.B.Radiator0_DutyOrder;// + CoolingADC.Radiator_T * Pr;
 //	TIM8 -> CCR2 = defaultDuty + TC_msg.B.WaterPump0_DutyOrder;// + CoolingADC.WaterPump_P * Pw;
 //	TIM8 -> CCR3 = defaultDuty + TC_msg.B.Radiator1_DutyOrder;// + CoolingADC.Radiator_T * Pr;
 //	TIM8 -> CCR4 = defaultDuty + TC_msg.B.WaterPump1_DutyOrder;// + CoolingADC.WaterPump_P * Pw;
 
+	uint8_t duty0 = (int)(TDRatio*CoolingADC.Radiator0_T);
+	uint8_t duty1 = (int)(TDRatio*CoolingADC.Radiator1_T);
 
-
-	TIM1 -> CCR1 = defaultDuty;
-	TIM8 -> CCR1 = defaultDuty;
-	TIM8 -> CCR2 = defaultDuty;
-	TIM8 -> CCR3 = defaultDuty;
-	TIM8 -> CCR4 = defaultDuty;
+	TIM1 -> CCR1 = duty1;
+	TIM8 -> CCR1 = duty1;
+	TIM8 -> CCR2 = duty1;
+	TIM8 -> CCR3 = duty0;
+	TIM8 -> CCR4 = duty0;
 
 
 	float Ke = 0.5;
