@@ -1,0 +1,4 @@
+GAS_CCTL.c:26:6:GAS_CCTL_outputInit	8	static
+GAS_CCTL.c:36:13:GAS_CCTL_onAll	8	static
+GAS_CCTL.c:44:13:GAS_CCTL_offAll	8	static
+GAS_CCTL.c:53:6:GAS_CCTL_Control	40	static
