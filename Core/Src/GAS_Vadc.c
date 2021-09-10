@@ -10,8 +10,8 @@
 #include "math.h"
 
 uint32_t NumberOfVadc = 8;
-volatile uint16_t ValueOfADC[5];
-CoolingADC_t CoolingADC;
+volatile uint32_t ValueOfADC[8];
+CoolingADC_t Cool6ingADC;
 
 void GAS_Vadc_init(void);
 void GAS_Vadc_dmaIn(void);
@@ -21,27 +21,29 @@ void GAS_Vadc_getValue(void);
 
 void GAS_Vadc_init(void)
 {
-	if(HAL_ADC_Start_DMA(&hadc1, ValueOfADC, NumberOfVadc) != HAL_OK)
+	if(HAL_ADC_Start_DMA(&hadc1, (uint32_t*)ValueOfADC, NumberOfVadc) != HAL_OK)
 	{
 		Error_Handler();
 	}
 }
 
-static uint16_t calcTemp(uint16_t ADCVal){
-	float ratio = 1;
-	uint16_t rawtemp = pow(0.467,(ADCVal-5.01))+13.875;
-	return (int)(ratio * rawtemp);
+static uint16_t calcTemp(float ADCVal){
+	float V = (float)(ADCVal*3.3/4095);
+	float temp = 0.0048*exp(3.0409*V);
+	return (int)(temp*10);
+//	return ;
 }
 
 void GAS_Vadc_getValue(void)
 {
-	CoolingADC.Radiator0_IS=ValueOfADC[0];
-	CoolingADC.Remain=ValueOfADC[1];
-	CoolingADC.External_IS=ValueOfADC[2];
-	CoolingADC.WaterPump_P=ValueOfADC[3];
+	// R = 0.1 -> product 10
+	CoolingADC.Radiator0_IS=ValueOfADC[0]*10;
+	CoolingADC.Remain=ValueOfADC[1]*10;
+	CoolingADC.External_IS=ValueOfADC[2]*10;
+	CoolingADC.WaterPump_P=ValueOfADC[3]*10;
 	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[4]);
-	CoolingADC.WaterPump1_IS=ValueOfADC[5];
+	CoolingADC.WaterPump0_IS=ValueOfADC[5]*10;
 	CoolingADC.Radiator1_IS=calcTemp(ValueOfADC[6]);
-	CoolingADC.WaterPump1_IS=ValueOfADC[7];
+	CoolingADC.WaterPump1_IS=ValueOfADC[7]*10;
 
 }

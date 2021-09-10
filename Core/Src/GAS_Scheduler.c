@@ -10,7 +10,7 @@
 #include "tim.h"
 
 extern uint8_t canRx0Data[8];
-extern volatile uint16_t ValueOfADC[5];
+//extern volatile uint32_t ValueOfADC[8];
 
 uint8_t pin_state;
 
@@ -49,14 +49,15 @@ void GAS_Scheduler_init(void)
 
 void GAS_Scheduler_taskCounter_1ms(void)
 {
+	GAS_Vadc_getValue();
 	GAS_CCTL_Control();
-	GAS_Can_sendMessage();
+//	GAS_Can_sendMessage();
 //	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
 }
 
 void GAS_Scheduler_taskCounter_10ms(void)
 {
-//	GAS_Can_sendMessage();
+	GAS_Can_sendMessage();
 
 }
 

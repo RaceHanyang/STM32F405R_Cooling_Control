@@ -37,6 +37,7 @@
   * @brief  HAL Status structures definition  
   */  
 
+
 /* Exported macro ------------------------------------------------------------*/
 
 #define UNUSED(X) (void)X      /* To avoid gcc/g++ warnings */

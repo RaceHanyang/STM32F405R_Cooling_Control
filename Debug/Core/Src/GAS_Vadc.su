@@ -1,2 +1,3 @@
-GAS_Vadc.c:21:6:GAS_Vadc_init	8	static
-GAS_Vadc.c:29:6:GAS_Vadc_getValue	4	static
+GAS_Vadc.c:22:6:GAS_Vadc_init	8	static
+GAS_Vadc.c:30:17:calcTemp	32	static
+GAS_Vadc.c:37:6:GAS_Vadc_getValue	8	static
