@@ -60,12 +60,12 @@ void GAS_CCTL_Control(void){
 	uint8_t duty0 = (int)(a0*CoolingADC.Radiator0_T + b0);			//Radiator0,1_T => celcius degree of coolant producted by 10.
 	uint8_t duty1 = (int)(a1*CoolingADC.Radiator1_T + b1);
 
-	if (TC_switch.B.AutoMode_ON){
+	if (1){//TC_switch.B.AutoMode_ON){
 		TIM1 -> CCR1 = duty1;  //External FAN
-		TIM8 -> CCR1 = duty1;  //Radiator fan 1  (right)
-		TIM8 -> CCR2 = duty1;	 //Water pump 1     (right)
-		TIM8 -> CCR3 = duty0;  //Radiator 0	   (left)
-		TIM8 -> CCR4 = duty0;	 //Water pump 0      (left)
+		TIM8 -> CCR1 = 50;//duty1;  //Radiator fan 1  (right)
+		TIM8 -> CCR2 = 50;//duty1;	 //Water pump 1     (right)
+		TIM8 -> CCR3 = 50;//duty0;  //Radiator 0	   (left)
+		TIM8 -> CCR4 = 50;//duty0;	 //Water pump 0      (left)
 	}
 	else{
 		uint8_t defaultDuty = TC_order.B.defaultDutyOrder;
