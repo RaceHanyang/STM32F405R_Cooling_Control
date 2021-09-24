@@ -34,38 +34,44 @@ void GAS_CCTL_outputInit(void)
 
 }
 
-//static void GAS_CCTL_onAll(void){
-//	HAL_GPIO_WritePin(GPIOB,ExternalFan_INH_Pin, GPIO_PIN_SET);
-//	HAL_GPIO_WritePin(GPIOB,Radiator0_INH_Pin, GPIO_PIN_SET);
-//	HAL_GPIO_WritePin(GPIOB,Radiator1_INH_Pin, GPIO_PIN_SET);
+static void GAS_CCTL_onAll(void){
+	HAL_GPIO_WritePin(GPIOB,ExternalFan_INH_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,Radiator0_INH_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,Radiator1_INH_Pin, GPIO_PIN_SET);
 //	HAL_GPIO_WritePin(GPIOB,WaterPump0_INH_Pin, GPIO_PIN_SET);
 //	HAL_GPIO_WritePin(GPIOB,Waterpump1_INH_Pin, GPIO_PIN_SET);
-//}
-//
-//static void GAS_CCTL_offAll(void){
-//	HAL_GPIO_WritePin(GPIOB,ExternalFan_INH_Pin, GPIO_PIN_SET);
-//	HAL_GPIO_WritePin(GPIOB,Radiator0_INH_Pin, GPIO_PIN_SET);
-//	HAL_GPIO_WritePin(GPIOB,Radiator1_INH_Pin, GPIO_PIN_SET);
+}
+
+static void GAS_CCTL_offAll(void){
+	HAL_GPIO_WritePin(GPIOB,ExternalFan_INH_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,Radiator0_INH_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,Radiator1_INH_Pin, GPIO_PIN_SET);
 //	HAL_GPIO_WritePin(GPIOB,WaterPump0_INH_Pin, GPIO_PIN_SET);
 //	HAL_GPIO_WritePin(GPIOB,Waterpump1_INH_Pin, GPIO_PIN_SET);
-//}
+}
 
 
 void GAS_CCTL_Control(void){
 
-	float a0 = 2.2;
-	uint8_t b0 = 6;
-	float a1 = 9.8;
-	int16_t b1 = -150;
-	uint8_t duty0 = (int)(a0*CoolingADC.Radiator0_T + b0);			//Radiator0,1_T => celcius degree of coolant producted by 10.
-	uint8_t duty1 = (int)(a1*CoolingADC.Radiator1_T + b1);
+	float a0 = 1.9308;
+	uint8_t b0 = 60;
+	float a1 = 1.007;
+	int16_t b1 = 79;
+	uint8_t duty0 = (int)((CoolingADC.Radiator0_T - b0)/a0) ;			//Radiator0,1_T => celcius degree of coolant producted by 10.
+	uint8_t duty1 = (int)((CoolingADC.Radiator1_T - b1)/a1);
 
+	if (duty1>99)duty1 = 99;
+	else if (duty1<20)duty1 = 20;
+	if (duty0>99)duty0 = 99;
+	else if (duty0<20)duty0=20;
+
+	GAS_CCTL_onAll();
 	if (1){//TC_switch.B.AutoMode_ON){
 		TIM1 -> CCR1 = duty1;  //External FAN
-		TIM8 -> CCR1 = 50;//duty1;  //Radiator fan 1  (right)
-		TIM8 -> CCR2 = 50;//duty1;	 //Water pump 1     (right)
-		TIM8 -> CCR3 = 50;//duty0;  //Radiator 0	   (left)
-		TIM8 -> CCR4 = 50;//duty0;	 //Water pump 0      (left)
+		TIM8 -> CCR1 = duty1;  //Radiator fan 1  (right)
+		TIM8 -> CCR2 = duty1;	 //Water pump 1     (right)
+		TIM8 -> CCR3 = duty0;  //Radiator 0	   (left)
+		TIM8 -> CCR4 = duty0;	 //Water pump 0      (left)
 	}
 	else{
 		uint8_t defaultDuty = TC_order.B.defaultDutyOrder;
