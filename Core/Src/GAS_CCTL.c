@@ -27,9 +27,9 @@ void GAS_CCTL_Control(void);
 void GAS_CCTL_outputInit(void)
 {
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
 	HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
 
 }
@@ -68,9 +68,9 @@ void GAS_CCTL_Control(void){
 	GAS_CCTL_onAll();
 	if (1){//TC_switch.B.AutoMode_ON){
 		TIM1 -> CCR1 = duty1;  //External FAN
-		TIM8 -> CCR1 = duty1;  //Radiator fan 1  (right)
+		TIM3 -> CCR1 = duty1 >= 50? duty:0;  //Radiator fan 1  (right)
 		TIM8 -> CCR2 = duty1;	 //Water pump 1     (right)
-		TIM8 -> CCR3 = duty0;  //Radiator 0	   (left)
+		TIM3 -> CCR3 = duty0 >= 50? duty:0;  //Radiator 0	   (left)
 		TIM8 -> CCR4 = duty0;	 //Water pump 0      (left)
 	}
 	else{
