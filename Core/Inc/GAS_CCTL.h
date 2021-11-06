@@ -9,7 +9,7 @@
 #define INC_GAS_CCTL_H_
 
 #include "tim.h"
-#include "stm32f4xx_hal_tim.h"
+#include "stm32f4xx_hal.h"
 #include "GAS_Vadc.h"
 #include "GAS_CAN.h"
 

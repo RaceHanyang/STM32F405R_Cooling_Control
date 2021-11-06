@@ -50,7 +50,7 @@ void GAS_Scheduler_init(void)
 void GAS_Scheduler_taskCounter_1ms(void)
 {
 	GAS_Vadc_getValue();
-	GAS_CCTL_Control();
+
 //	GAS_Can_sendMessage();
 //	GAS_PWM_changeOutput_ch1(ValueOfADC[0]);
 }
@@ -58,7 +58,7 @@ void GAS_Scheduler_taskCounter_1ms(void)
 void GAS_Scheduler_taskCounter_10ms(void)
 {
 	GAS_Can_sendMessage();
-
+	GAS_CCTL_Control();
 }
 
 void GAS_Scheduler_taskCounter_100ms(void)

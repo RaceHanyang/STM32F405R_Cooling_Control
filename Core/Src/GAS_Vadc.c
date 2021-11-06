@@ -41,9 +41,10 @@ void GAS_Vadc_getValue(void)
 	CoolingADC.Remain=ValueOfADC[1]*10;
 	CoolingADC.External_IS=ValueOfADC[2]*10;
 	CoolingADC.WaterPump_P=ValueOfADC[3]*10;
-	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[4]);
+	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[4]);			//Left RadTemp
 	CoolingADC.WaterPump0_IS=ValueOfADC[5]*10;
-	CoolingADC.Radiator1_T=calcTemp(ValueOfADC[3]);
+	CoolingADC.Radiator1_T=calcTemp(ValueOfADC[3]);			//Right RadTemp
+
 	CoolingADC.WaterPump1_IS=ValueOfADC[7]*10;
 
 }

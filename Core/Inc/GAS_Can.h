@@ -8,7 +8,7 @@
 #ifndef SRC_GETANDSEND_H_
 #define SRC_GETANDSEND_H_
 
-#include "stm32f4xx_hal_can.h"
+#include "stm32f4xx_hal.h"
 #include "can.h"
 #include "GAS_Vadc.h"
 #include <stdio.h>
@@ -22,7 +22,7 @@ typedef union{
 		uint8_t WaterPump1_IS;
 		uint8_t Radiator0_IS;
 		uint8_t Radiator1_IS;
-		uint8_t WaterPump_P;
+		uint8_t manualMode_isON;
 		uint8_t Radiator0_T;
 		uint8_t Radiator1_T;
 	}__attribute__((aligned(1),packed)) B;
@@ -32,7 +32,7 @@ typedef union{
 typedef union{
 	uint8_t RxData[8];
 	struct{
-		uint8_t AutoMode_ON : 1;
+		uint8_t manualMode_ON : 1;
 		uint8_t WaterPump0_ON : 1;
 		uint8_t WaterPump1_ON : 1;
 		uint8_t Radiator0_ON : 1;
