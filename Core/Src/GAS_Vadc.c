@@ -36,9 +36,19 @@ static uint16_t calcTemp(float ADCVal){
 
 void GAS_Vadc_getValue(void)
 {
+	/*
+	 * FROM f48d32
+	 * TO-DO!!!
+	 *
+	 * Inquire Voltage -> Meaningful Measurement conversion method.
+	 * Modify NumberOfVadc 8->10? 9 if RANK2 removed?
+	 * Length of ValueOfADC shall to be updated properly.
+	 * Implement the conversions!
+	 * */
+
 	// R = 0.1 -> product 10
 	CoolingADC.Radiator0_IS=ValueOfADC[0]*10;
-	CoolingADC.Remain=ValueOfADC[1]*10;
+	CoolingADC.Remain=ValueOfADC[1]*10; ///Unused ADC PIN?
 	CoolingADC.External_IS=ValueOfADC[2]*10;
 	CoolingADC.WaterPump_P=ValueOfADC[3]*10;
 	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[4]);			//Left RadTemp
