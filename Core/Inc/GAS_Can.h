@@ -27,7 +27,7 @@ typedef union{
 		uint8_t Radiator1_T;
 	}__attribute__((aligned(1),packed)) B;
 
-}stm32_msg_t;
+}stm32_msg1_t;
 
 typedef union{
 	uint8_t RxData[8];
@@ -62,7 +62,7 @@ typedef union{
 
 }TC_order_t;
 
-extern stm32_msg_t stm32;
+extern stm32_msg1_t stm32;
 extern TC_switch_t TC_switch;
 extern TC_order_t TC_order;
 

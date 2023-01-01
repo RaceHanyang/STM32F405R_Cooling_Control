@@ -15,13 +15,13 @@ CAN_RxHeaderTypeDef canRxHeader2;
 CAN_TxHeaderTypeDef canTxHeader;
 uint8_t canRx0Data[8];
 uint32_t TxMailBox;
-stm32_msg_t stm32;
+stm32_msg1_t stm32;
 
 TC_switch_t TC_switch;
 TC_order_t TC_order;
 
-stm32_msg_t TC237;
-uint16_t STM32_ID = 0x405C;
+stm32_msg1_t TC237;
+uint16_t STM32_ID = 0x405C; //Re-factoring to 0x405C01 requires more bits. Since the only reference for this variable, canTxHeader.ExtId is uint32_t type, I believe this won't bring any issues but if things get messed up, be curious.
 uint32_t TC_switch_ID = 0x275C01;
 uint32_t TC_order_ID = 0x275C02;
 
