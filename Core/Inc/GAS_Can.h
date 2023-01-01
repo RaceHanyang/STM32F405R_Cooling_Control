@@ -30,6 +30,21 @@ typedef union{
 }stm32_msg1_t;
 
 typedef union{
+	uint8_t TxData[8];
+	struct{
+		uint8_t WaterPressure0;
+		uint8_t WaterPressure1;
+		uint8_t duty0;
+		uint8_t duty1;
+		uint8_t duty2;
+		uint8_t Remain;
+		uint8_t Remain2;
+		uint8_t Remain3;
+	}__attribute__((aligned(1),packed)) B;
+
+}stm32_msg2_t;
+
+typedef union{
 	uint8_t RxData[8];
 	struct{
 		uint8_t manualMode_ON : 1;
@@ -62,7 +77,8 @@ typedef union{
 
 }TC_order_t;
 
-extern stm32_msg1_t stm32;
+extern stm32_msg1_t stm32_tx1;
+extern stm32_msg2_t stm32_tx2;
 extern TC_switch_t TC_switch;
 extern TC_order_t TC_order;
 

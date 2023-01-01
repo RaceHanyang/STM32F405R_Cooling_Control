@@ -12,16 +12,18 @@ CAN_FilterTypeDef sFilterConfig;
 CAN_FilterTypeDef sFilterConfig2;
 CAN_RxHeaderTypeDef canRxHeader;
 CAN_RxHeaderTypeDef canRxHeader2;
-CAN_TxHeaderTypeDef canTxHeader;
+CAN_TxHeaderTypeDef canTxHeader; //for stm32_msg1_t
+CAN_TxHeaderTypeDef canTxHeader2; //for stm32_msg2_t
 uint8_t canRx0Data[8];
 uint32_t TxMailBox;
-stm32_msg1_t stm32;
-
+stm32_msg1_t stm32_tx1;
+stm32_msg2_t stm32_tx2;
 TC_switch_t TC_switch;
 TC_order_t TC_order;
 
-stm32_msg1_t TC237;
-uint16_t STM32_ID = 0x405C; //Re-factoring to 0x405C01 requires more bits. Since the only reference for this variable, canTxHeader.ExtId is uint32_t type, I believe this won't bring any issues but if things get messed up, be curious.
+//stm32_msg1_t TC237;
+uint32_t STM32_tx1_ID = 0x405C01; //Re-factoring to 0x405C01 requires more bits. Since the only reference for this variable, canTxHeader.ExtId is uint32_t type, I believe this won't bring any issues but if things get messed up, be curious.
+uint32_t STM32_tx2_ID = 0x405C02;
 uint32_t TC_switch_ID = 0x275C01;
 uint32_t TC_order_ID = 0x275C02;
 
@@ -41,10 +43,15 @@ void GAS_Can_txSetting(void)
 	 * CAN tx set function
 	 * set ID, IDE, DLC
 	 */
-	canTxHeader.ExtId = STM32_ID;
+	canTxHeader.ExtId = STM32_tx1_ID;
 	canTxHeader.IDE	= CAN_ID_EXT;
 	canTxHeader.RTR	= CAN_RTR_DATA;
 	canTxHeader.DLC	=	8;
+
+	canTxHeader2.ExtId = STM32_tx2_ID;
+	canTxHeader2.IDE	= CAN_ID_EXT;
+	canTxHeader2.RTR	= CAN_RTR_DATA;
+	canTxHeader2.DLC	=	8;
 
 
 }
@@ -121,7 +128,7 @@ void GAS_Can_sendMessage()
 	 * send Message data with sendData[8]
 	 */
 	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
-	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32.TxData[0], &TxMailBox);
+	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_tx1.TxData[0], &TxMailBox);
 }
 
 

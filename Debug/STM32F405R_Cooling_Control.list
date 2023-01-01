@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002007c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00015eff  00000000  00000000  000200ac  2**0
+ 12 .debug_info   00015fa9  00000000  00000000  000200ac  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00003bd1  00000000  00000000  00035fab  2**0
+ 13 .debug_abbrev 00003bd1  00000000  00000000  00036055  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001370  00000000  00000000  00039b80  2**3
+ 14 .debug_aranges 00001370  00000000  00000000  00039c28  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000011b0  00000000  00000000  0003aef0  2**3
+ 15 .debug_ranges 000011b0  00000000  00000000  0003af98  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00023c99  00000000  00000000  0003c0a0  2**0
+ 16 .debug_macro  00023c99  00000000  00000000  0003c148  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000197eb  00000000  00000000  0005fd39  2**0
+ 17 .debug_line   000197eb  00000000  00000000  0005fde1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000d1e10  00000000  00000000  00079524  2**0
+ 18 .debug_str    000d1e4d  00000000  00000000  000795cc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  0014b334  2**0
+ 19 .comment      00000050  00000000  00000000  0014b419  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005390  00000000  00000000  0014b384  2**2
+ 20 .debug_frame  00005390  00000000  00000000  0014b46c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1254,9 +1254,9 @@ void GAS_CCTL_Control(void){
  8000edc:	b29a      	uxth	r2, r3
  8000ede:	4b8c      	ldr	r3, [pc, #560]	; (8001110 <GAS_CCTL_Control+0x24c>)
  8000ee0:	801a      	strh	r2, [r3, #0]
-			stm32.B.Radiator0_T = CoolingADC.Radiator0_T;
-			stm32.B.Radiator1_T = CoolingADC.Radiator1_T;
-			stm32.B.manualMode_isON = TC_switch.B.manualMode_ON;
+			stm32_tx1.B.Radiator0_T = CoolingADC.Radiator0_T;
+			stm32_tx1.B.Radiator1_T = CoolingADC.Radiator1_T;
+			stm32_tx1.B.manualMode_isON = TC_switch.B.manualMode_ON;
 
 	}
 }
@@ -1429,7 +1429,7 @@ void GAS_CCTL_Control(void){
 			float Kp = 0.5;
  8001028:	f04f 537c 	mov.w	r3, #1056964608	; 0x3f000000
  800102c:	60fb      	str	r3, [r7, #12]
-			stm32.B.External_IS = (uint8_t)(CoolingADC.External_IS * Ke);
+			stm32_tx1.B.External_IS = (uint8_t)(CoolingADC.External_IS * Ke);
  800102e:	4b3e      	ldr	r3, [pc, #248]	; (8001128 <GAS_CCTL_Control+0x264>)
  8001030:	881b      	ldrh	r3, [r3, #0]
  8001032:	ee07 3a90 	vmov	s15, r3
@@ -1442,7 +1442,7 @@ void GAS_CCTL_Control(void){
  800104c:	b2da      	uxtb	r2, r3
  800104e:	4b3d      	ldr	r3, [pc, #244]	; (8001144 <GAS_CCTL_Control+0x280>)
  8001050:	701a      	strb	r2, [r3, #0]
-			stm32.B.Radiator0_IS = (uint8_t)(CoolingADC.Radiator0_IS * Kr);
+			stm32_tx1.B.Radiator0_IS = (uint8_t)(CoolingADC.Radiator0_IS * Kr);
  8001052:	4b35      	ldr	r3, [pc, #212]	; (8001128 <GAS_CCTL_Control+0x264>)
  8001054:	88db      	ldrh	r3, [r3, #6]
  8001056:	ee07 3a90 	vmov	s15, r3
@@ -1455,7 +1455,7 @@ void GAS_CCTL_Control(void){
  8001070:	b2da      	uxtb	r2, r3
  8001072:	4b34      	ldr	r3, [pc, #208]	; (8001144 <GAS_CCTL_Control+0x280>)
  8001074:	70da      	strb	r2, [r3, #3]
-			stm32.B.Radiator1_IS = (uint8_t)(CoolingADC.Radiator1_IS* Kr);
+			stm32_tx1.B.Radiator1_IS = (uint8_t)(CoolingADC.Radiator1_IS* Kr);
  8001076:	4b2c      	ldr	r3, [pc, #176]	; (8001128 <GAS_CCTL_Control+0x264>)
  8001078:	891b      	ldrh	r3, [r3, #8]
  800107a:	ee07 3a90 	vmov	s15, r3
@@ -1468,7 +1468,7 @@ void GAS_CCTL_Control(void){
  8001094:	b2da      	uxtb	r2, r3
  8001096:	4b2b      	ldr	r3, [pc, #172]	; (8001144 <GAS_CCTL_Control+0x280>)
  8001098:	711a      	strb	r2, [r3, #4]
-			stm32.B.WaterPump0_IS = (uint8_t)(CoolingADC.WaterPump0_IS*Kw);
+			stm32_tx1.B.WaterPump0_IS = (uint8_t)(CoolingADC.WaterPump0_IS*Kw);
  800109a:	4b23      	ldr	r3, [pc, #140]	; (8001128 <GAS_CCTL_Control+0x264>)
  800109c:	885b      	ldrh	r3, [r3, #2]
  800109e:	ee07 3a90 	vmov	s15, r3
@@ -1481,7 +1481,7 @@ void GAS_CCTL_Control(void){
  80010b8:	b2da      	uxtb	r2, r3
  80010ba:	4b22      	ldr	r3, [pc, #136]	; (8001144 <GAS_CCTL_Control+0x280>)
  80010bc:	705a      	strb	r2, [r3, #1]
-			stm32.B.WaterPump1_IS = (uint8_t)(CoolingADC.WaterPump1_IS*Kw);
+			stm32_tx1.B.WaterPump1_IS = (uint8_t)(CoolingADC.WaterPump1_IS*Kw);
  80010be:	4b1a      	ldr	r3, [pc, #104]	; (8001128 <GAS_CCTL_Control+0x264>)
  80010c0:	889b      	ldrh	r3, [r3, #4]
  80010c2:	ee07 3a90 	vmov	s15, r3
@@ -1494,19 +1494,19 @@ void GAS_CCTL_Control(void){
  80010dc:	b2da      	uxtb	r2, r3
  80010de:	4b19      	ldr	r3, [pc, #100]	; (8001144 <GAS_CCTL_Control+0x280>)
  80010e0:	709a      	strb	r2, [r3, #2]
-			stm32.B.Radiator0_T = CoolingADC.Radiator0_T;
+			stm32_tx1.B.Radiator0_T = CoolingADC.Radiator0_T;
  80010e2:	4b11      	ldr	r3, [pc, #68]	; (8001128 <GAS_CCTL_Control+0x264>)
  80010e4:	899b      	ldrh	r3, [r3, #12]
  80010e6:	b2da      	uxtb	r2, r3
  80010e8:	4b16      	ldr	r3, [pc, #88]	; (8001144 <GAS_CCTL_Control+0x280>)
  80010ea:	719a      	strb	r2, [r3, #6]
-			stm32.B.Radiator1_T = CoolingADC.Radiator1_T;
+			stm32_tx1.B.Radiator1_T = CoolingADC.Radiator1_T;
  80010ec:	4b0e      	ldr	r3, [pc, #56]	; (8001128 <GAS_CCTL_Control+0x264>)
  80010ee:	89db      	ldrh	r3, [r3, #14]
  80010f0:	b2da      	uxtb	r2, r3
  80010f2:	4b14      	ldr	r3, [pc, #80]	; (8001144 <GAS_CCTL_Control+0x280>)
  80010f4:	71da      	strb	r2, [r3, #7]
-			stm32.B.manualMode_isON = TC_switch.B.manualMode_ON;
+			stm32_tx1.B.manualMode_isON = TC_switch.B.manualMode_ON;
  80010f6:	4b0e      	ldr	r3, [pc, #56]	; (8001130 <GAS_CCTL_Control+0x26c>)
  80010f8:	781b      	ldrb	r3, [r3, #0]
  80010fa:	f3c3 0300 	ubfx	r3, r3, #0, #1
@@ -1548,7 +1548,7 @@ void GAS_Can_txSetting(void)
 	 * CAN tx set function
 	 * set ID, IDE, DLC
 	 */
-	canTxHeader.ExtId = STM32_ID;
+	canTxHeader.ExtId = STM32_tx1_ID;
  800114c:	4b09      	ldr	r3, [pc, #36]	; (8001174 <GAS_Can_txSetting+0x2c>)
  800114e:	881b      	ldrh	r3, [r3, #0]
  8001150:	461a      	mov	r2, r3
@@ -1714,7 +1714,7 @@ void GAS_Can_sendMessage()
  800122a:	4603      	mov	r3, r0
  800122c:	4a05      	ldr	r2, [pc, #20]	; (8001244 <GAS_Can_sendMessage+0x24>)
  800122e:	6013      	str	r3, [r2, #0]
-	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32.TxData[0], &TxMailBox);
+	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_tx1.TxData[0], &TxMailBox);
  8001230:	4b04      	ldr	r3, [pc, #16]	; (8001244 <GAS_Can_sendMessage+0x24>)
  8001232:	4a05      	ldr	r2, [pc, #20]	; (8001248 <GAS_Can_sendMessage+0x28>)
  8001234:	4905      	ldr	r1, [pc, #20]	; (800124c <GAS_Can_sendMessage+0x2c>)

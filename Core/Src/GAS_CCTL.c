@@ -106,15 +106,15 @@ void GAS_CCTL_Control(void){
 			float Kw = 0.5;
 			float Kp = 0.5;
 
-			stm32.B.External_IS = (uint8_t)(CoolingADC.External_IS * Ke);
-			stm32.B.Radiator0_IS = (uint8_t)(CoolingADC.Radiator0_IS * Kr);
-			stm32.B.Radiator1_IS = (uint8_t)(CoolingADC.Radiator1_IS* Kr);
-			stm32.B.WaterPump0_IS = (uint8_t)(CoolingADC.WaterPump0_IS*Kw);
-			stm32.B.WaterPump1_IS = (uint8_t)(CoolingADC.WaterPump1_IS*Kw);
+			stm32_tx1.B.External_IS = (uint8_t)(CoolingADC.External_IS * Ke);
+			stm32_tx1.B.Radiator0_IS = (uint8_t)(CoolingADC.Radiator0_IS * Kr);
+			stm32_tx1.B.Radiator1_IS = (uint8_t)(CoolingADC.Radiator1_IS* Kr);
+			stm32_tx1.B.WaterPump0_IS = (uint8_t)(CoolingADC.WaterPump0_IS*Kw);
+			stm32_tx1.B.WaterPump1_IS = (uint8_t)(CoolingADC.WaterPump1_IS*Kw);
 		//	stm32.B.WaterPump_P = (uint8_t)(CoolingADC.WaterPump_P*Kp);
-			stm32.B.Radiator0_T = CoolingADC.Radiator0_T;
-			stm32.B.Radiator1_T = CoolingADC.Radiator1_T;
-			stm32.B.manualMode_isON = TC_switch.B.manualMode_ON;
+			stm32_tx1.B.Radiator0_T = CoolingADC.Radiator0_T;
+			stm32_tx1.B.Radiator1_T = CoolingADC.Radiator1_T;
+			stm32_tx1.B.manualMode_isON = TC_switch.B.manualMode_ON;
 
 	}
 }
