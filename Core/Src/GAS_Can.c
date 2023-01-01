@@ -129,6 +129,9 @@ void GAS_Can_sendMessage()
 	 */
 	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
 	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader, &stm32_tx1.TxData[0], &TxMailBox);
+
+	TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
+	HAL_CAN_AddTxMessage(&hcan2, &canTxHeader2, &stm32_tx2.TxData[0], &TxMailBox);
 }
 
 
