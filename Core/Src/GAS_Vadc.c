@@ -9,9 +9,9 @@
 #include "stdio.h"
 #include "math.h"
 
-uint32_t NumberOfVadc = 8;
-volatile uint32_t ValueOfADC[8];
-CoolingADC_t Cool6ingADC;
+uint32_t NumberOfVadc = 9;
+volatile uint32_t ValueOfADC[9];
+CoolingADC_t CoolingADC;
 
 void GAS_Vadc_init(void);
 void GAS_Vadc_dmaIn(void);
@@ -47,14 +47,16 @@ void GAS_Vadc_getValue(void)
 	 * */
 
 	// R = 0.1 -> product 10
-	CoolingADC.Radiator0_IS=ValueOfADC[0]*10;
+	CoolingADC.Radiator0_IS=ValueOfADC[0]*10; //ADC00
 	//CoolingADC.Remain=ValueOfADC[1]*10; ///Unused ADC PIN?
-	CoolingADC.External_IS=ValueOfADC[2]*10;
+	CoolingADC.External_IS=ValueOfADC[1]*10; //ADC02
 	//CoolingADC.WaterPump_P=ValueOfADC[3]*10;
-	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[4]);			//Left RadTemp
-	CoolingADC.WaterPump0_IS=ValueOfADC[5]*10;
-	CoolingADC.Radiator1_T=calcTemp(ValueOfADC[3]);			//Right RadTemp
-
-	CoolingADC.WaterPump1_IS=ValueOfADC[7]*10;
+	CoolingADC.WaterPressure0 = ValueOfADC[2] * 10;//ADC03, Check if this conversion is legit!
+	CoolingADC.Radiator0_T=calcTemp(ValueOfADC[3]);			//Left RadTemp //ADC04
+	CoolingADC.WaterPump0_IS=ValueOfADC[4]*10; //ADC13
+	CoolingADC.Radiator1_IS = ValueOfADC[5] * 10;//ADC12, Check if this conversion is legit!
+	CoolingADC.WaterPump1_IS=ValueOfADC[6]*10; //ADC11
+	CoolingADC.Radiator1_T=calcTemp(ValueOfADC[7]);			//Right RadTemp //ADC5
+	CoolingADC.WaterPressure1 = ValueOfADC[8] * 10;//ADC6, Check if this conversion is legit!
 
 }

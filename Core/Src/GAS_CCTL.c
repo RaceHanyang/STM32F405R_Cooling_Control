@@ -11,7 +11,7 @@
 //TC_switch_t TC_switch;
 //TC_order_t TC_order;
 //stm32_msg1_t stm32;
-CoolingADC_t CoolingADC;
+//CoolingADC_t CoolingADC;
 
 uint16_t StartCount = 0;
 
