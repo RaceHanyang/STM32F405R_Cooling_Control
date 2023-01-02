@@ -116,6 +116,12 @@ void GAS_CCTL_Control(void){
 			stm32_tx1.B.Radiator1_T = CoolingADC.Radiator1_T;
 			stm32_tx1.B.manualMode_isON = TC_switch.B.manualMode_ON;
 
+			stm32_tx2.B.WaterPressure0 = (uint8_t)CoolingADC.WaterPressure0;
+			stm32_tx2.B.WaterPressure1 = (uint8_t)CoolingADC.WaterPressure1;
+			stm32_tx2.B.duty0 = (uint8_t)duty0;
+			stm32_tx2.B.duty1 = (uint8_t)duty1;
+			stm32_tx2.B.duty2 = (uint8_t)duty1;
+
 	}
 }
 
