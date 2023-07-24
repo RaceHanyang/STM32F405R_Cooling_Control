@@ -8,9 +8,9 @@
 #include <GAS_CCTL.h>
 #include "stdio.h"
 
-TC_switch_t TC_switch;
-TC_order_t TC_order;
-stm32_msg_t stm32;
+//TC_switch_t TC_switch;
+//TC_order_t TC_order;
+//stm32_msg_t stm32;
 CoolingADC_t CoolingADC;
 
 uint16_t StartCount = 0;
