@@ -57,8 +57,8 @@ void GAS_CCTL_Control(void){
 	uint8_t b0 = 60;
 	float a1 = 1.007;
 	int16_t b1 = 79;
-	uint8_t duty0 = (int)((CoolingADC.Radiator0_T - b0)/a0) ;			//Radiator0,1_T => celcius degree of coolant producted by 10.
-	uint8_t duty1 = (int)((CoolingADC.Radiator1_T - b1)/a1);
+	uint8_t duty0 = 50;			//Radiator0,1_T => celcius degree of coolant producted by 10.
+	uint8_t duty1 = 50;`
 
 	if (duty1>99)duty1 = 99;
 	else if (duty1<20)duty1 = 20;
